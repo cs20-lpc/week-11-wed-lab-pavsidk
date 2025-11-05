@@ -10,11 +10,11 @@ int HashTableClosed<T>::insert(const T& key)
             table[index] = key;
             occupied[index] = 1;
             N++;
-            return index;
+            return i+1;
         }
         i++;
     }
-    return -1;
+    return M;
 }
 
 template <typename T>
@@ -26,9 +26,9 @@ pair<bool, int> HashTableClosed<T>::search(const T& key) const
     while (i < M) {
         index = probeIndex(key, i);
         if (occupied[index] && key == table[index]) {
-            return {true, index};
+            return {true, i+1};
         }
         i++;
     }
-    return {false, 0};
+    return {false, M};
 }
