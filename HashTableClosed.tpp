@@ -25,6 +25,8 @@ pair<bool, int> HashTableClosed<T>::search(const T& key) const
     int index;
     while (i < M) {
         index = probeIndex(key, i);
+        if (!occupied[index])
+            return {false, i + 1};
         if (occupied[index] && key == table[index]) {
             return {true, i+1};
         }
